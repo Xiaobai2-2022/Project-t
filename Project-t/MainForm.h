@@ -14,6 +14,33 @@ namespace Projectt {
 	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
+
+	/* private constants */
+	private:
+		/* Game Board Logic Constants */
+		static const int num_row = 18;												// total number of rows
+		static const int num_col = 10;												// total number of columns
+		static const int num_lbl = num_row * num_col;								// total number of labels
+
+		/* GUI Size Constants */
+		static const int size_block = 30;											// size of each block
+		static const int size_border = 5;											// size of the boarder
+		static const int size_form_x = size_border * 2 + size_block * num_col;		// main form's x size
+		static const int size_form_y = size_border * 2 + size_block * num_row;		// main form's Y size
+		
+
+	/* private helper methods */
+	private:
+		/*
+		 * change two dimensional item into one dimentsional
+		 * @param x: (int) the x coordinate for two dimensional
+		 * @param y: (int) the y coordinate for two dimensional
+		 * @returns: (int) the one dimensional code
+		 */
+		static int to_row_major (int x, int y) {
+			return num_row * x + y;
+		}
+
 	public:
 		MainForm(void)
 		{
@@ -35,10 +62,8 @@ namespace Projectt {
 			}
 		} 
 	private: 
-		System::Windows::Forms::Label^ label1;
-		System::Windows::Forms::Label^ label2;
 
-		array<System::Windows::Forms::Label^>^ labels = gcnew array<System::Windows::Forms::Label^>(10);
+		array<System::Windows::Forms::Label^>^ labels = gcnew array<System::Windows::Forms::Label^>(num_lbl);
 
 	private:
 		/// <summary>
@@ -54,23 +79,24 @@ namespace Projectt {
 		void InitializeComponent(void)
 		{
 
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->labels[0] = label1;
-			this->labels[1] = label2;
+			for (int i = 0; i < num_lbl; i++) {
+				this->labels[i] = (gcnew System::Windows::Forms::Label());
+			}
+
 			this->SuspendLayout();
 
-			this->labels[0]->Click += gcnew System::EventHandler(this, &MainForm::label1_Click);
-			this->labels[1]->Click += gcnew System::EventHandler(this, &MainForm::label2_Click);
-
-			/* Labels Array Test Complete */
-			for (int i = 0; i < 2; i++) {
-				this->labels[i]->AutoSize = true;
-				this->labels[i]->Location = System::Drawing::Point(0, i * 50);
-				this->labels[i]->Name = L"label" + i;
-				this->labels[i]->Size = System::Drawing::Size(50, 50);
-				this->labels[i]->TabIndex = 0;
-				this->labels[i]->Text = L"label" + i;
+			/* Set up the labels */
+			for (int i = 0; i < num_col; i++) {
+				for (int j = 0; j < num_row; j++) {
+					this->labels[to_row_major(i, j)]->AutoSize = false;
+					this->labels[to_row_major(i, j)]->Location = System::Drawing::Point(size_border + i * size_block, size_border + j * size_block);	// calculate the location for the block
+					this->labels[to_row_major(i, j)]->Name = L"label" + i;
+					this->labels[to_row_major(i, j)]->Size = System::Drawing::Size(size_block, size_block);												// set each block's size
+					this->labels[to_row_major(i, j)]->TabIndex = 0;
+					this->labels[to_row_major(i, j)]->Text = L"";
+					this->labels[to_row_major(i, j)]->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;										// set the border to Fixed3D https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.label.borderstyle?view=windowsdesktop-7.0#system-windows-forms-label-borderstyle
+					
+				}
 			}
 
 			// 
@@ -78,11 +104,12 @@ namespace Projectt {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 261);
-			this->Controls->Add(this->labels[0]);
-			this->Controls->Add(this->labels[1]);
+			this->ClientSize = System::Drawing::Size(size_form_x, size_form_y);							// set the size of the main form as calculated
+			for (int i = 0; i < num_lbl; i++) {
+				this->Controls->Add(this->labels[i]);													// add all the labels to form
+			}
 			this->Name = L"MainForm";
-			this->Text = L"MainForm";
+			this->Text = L"Tetris(X)";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -90,10 +117,6 @@ namespace Projectt {
 		}
 #pragma endregion
 	private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	};
 }
