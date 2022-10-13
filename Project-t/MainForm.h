@@ -67,7 +67,7 @@ namespace Projectt {
 			//
 			//TODO: Add the constructor code here
 			//
-			this->next_block[0] = 0;
+			this->next_block[0] = 6;
 			this->update_right_main();
 		}
 
@@ -365,7 +365,45 @@ namespace Projectt {
 				this->labels_right_main[to_row_major(1, 1, num_row_s)]->BackColor = Color::LightSkyBlue;
 				this->labels_right_main[to_row_major(1, 2, num_row_s)]->BackColor = Color::LightSkyBlue;
 				this->labels_right_main[to_row_major(1, 3, num_row_s)]->BackColor = Color::LightSkyBlue;
-
+				break;
+			case 1:
+				this->labels_right_main[to_row_major(0, 1, num_row_s)]->BackColor = Color::DarkBlue;
+				this->labels_right_main[to_row_major(1, 1, num_row_s)]->BackColor = Color::DarkBlue;
+				this->labels_right_main[to_row_major(1, 2, num_row_s)]->BackColor = Color::DarkBlue;
+				this->labels_right_main[to_row_major(1, 3, num_row_s)]->BackColor = Color::DarkBlue;
+				break;
+			case 2:
+				this->labels_right_main[to_row_major(1, 1, num_row_s)]->BackColor = Color::Orange;
+				this->labels_right_main[to_row_major(1, 2, num_row_s)]->BackColor = Color::Orange;
+				this->labels_right_main[to_row_major(1, 3, num_row_s)]->BackColor = Color::Orange;
+				this->labels_right_main[to_row_major(0, 3, num_row_s)]->BackColor = Color::Orange;
+				break;
+			case 3:
+				this->labels_right_main[to_row_major(0, 1, num_row_s)]->BackColor = Color::Yellow;
+				this->labels_right_main[to_row_major(0, 2, num_row_s)]->BackColor = Color::Yellow;
+				this->labels_right_main[to_row_major(1, 1, num_row_s)]->BackColor = Color::Yellow;
+				this->labels_right_main[to_row_major(1, 2, num_row_s)]->BackColor = Color::Yellow;
+				break;
+			case 4:
+				this->labels_right_main[to_row_major(0, 2, num_row_s)]->BackColor = Color::LightGreen;
+				this->labels_right_main[to_row_major(0, 3, num_row_s)]->BackColor = Color::LightGreen;
+				this->labels_right_main[to_row_major(1, 1, num_row_s)]->BackColor = Color::LightGreen;
+				this->labels_right_main[to_row_major(1, 2, num_row_s)]->BackColor = Color::LightGreen;
+				break;
+			case 5:
+				this->labels_right_main[to_row_major(0, 2, num_row_s)]->BackColor = Color::Purple;
+				this->labels_right_main[to_row_major(1, 1, num_row_s)]->BackColor = Color::Purple;
+				this->labels_right_main[to_row_major(1, 2, num_row_s)]->BackColor = Color::Purple;
+				this->labels_right_main[to_row_major(1, 3, num_row_s)]->BackColor = Color::Purple;
+				break;
+			case 6:
+				this->labels_right_main[to_row_major(0, 1, num_row_s)]->BackColor = Color::Red;
+				this->labels_right_main[to_row_major(0, 2, num_row_s)]->BackColor = Color::Red;
+				this->labels_right_main[to_row_major(1, 2, num_row_s)]->BackColor = Color::Red;
+				this->labels_right_main[to_row_major(1, 3, num_row_s)]->BackColor = Color::Red;
+				break;
+			default:
+				break;
 			}
 		}
 
